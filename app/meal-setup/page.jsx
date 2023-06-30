@@ -11,7 +11,7 @@ const MealSetup = () => {
   const { data: session } = useSession();
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ type: "", plan: "", ingredients: "", overview: "" });
+  const [post, setPost] = useState({ type: "", plan: "", ingredients: "", overview: "", seen:"", date:"", gender:""});
 
   const mealSetup = async (e) => {
     e.preventDefault();
@@ -26,6 +26,10 @@ const MealSetup = () => {
           plan: post.plan,
           ingredients: post.ingredients,
           overview: post.overview,
+          seen:post.seen,
+          date:post.date,
+          gender:post.gender,
+
 
         }),
       });

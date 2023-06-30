@@ -20,7 +20,20 @@ const MealSchema = new Schema({
   overview: {
     type: String,
     required: [true, 'MealOverview is required.'],
-  }
+  },
+  seen: {
+    type: String,
+    required: [true, 'seen is required.'],
+  },
+  date: {
+    type: String,
+    required: [true, 'date is required.'],
+  },
+  gender: {
+    type: String,
+    
+  },
+
 });
 
 const Meal = models.Meal || model('Meal', MealSchema);

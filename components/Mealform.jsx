@@ -67,7 +67,64 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
           />
         </label>
 
+       
+        <select value={post.seen} 
+        onChange={(e) => setPost({ ...post, seen: e.target.value })}>
+                        <option value="Nature">Nature</option>
+                        <option value="Mountain">Mountain</option>
+                        <option value="Ocean">Ocean</option>
+                        <option value="Wildlife">Wildlife</option>
+                        <option value="Forest">Forest</option>
+                    </select>
+    
 
+        <div>
+        <span className='font-satoshi font-semibold text-base text-gray-700'>
+         date
+          </span>
+          <div>
+          <input type="date" 
+          name="date"
+           value={post.date}
+           onChange={(e) => setPost({ ...post, date: e.target.value })}
+           
+           placeholder='Meal overview'
+           required
+           className='form_input'/>
+          </div>
+         
+        </div>
+    
+      <div>
+      <span className='font-satoshi font-semibold text-base text-gray-700'>
+        gender
+          </span>
+      <div className="form-check">
+      <input
+          type="radio"
+          name="gender"
+          value="male"
+          checked={post.gender === 'male'}
+          onChange={(e) => setPost({ ...post, gender: e.target.value })}
+        />
+        <label htmlFor="radioDefault" className="inline-block tet-gray-800">
+          male
+        </label>
+      </div>
+      <div className="form-check">
+        {/* <input type="radio" name="gender" value={post.gender} onChange={(e) => setPost({ ...post, gender: e.target.value })}/> */}
+        <input
+          type="radio"
+          name="gender"
+          value="female"
+          checked={post.gender === 'female'}
+          onChange={(e) => setPost({ ...post, gender: e.target.value })}
+        />
+        <label htmlFor="radioDefault" className="inline-block tet-gray-800">
+          female
+        </label>
+      </div>
+      </div>
         <div className='flex-end mx-3 mb-5 gap-4'>
           <Link href='/' className='text-gray-500 text-sm'>
             Cancel
