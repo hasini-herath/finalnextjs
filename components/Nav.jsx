@@ -4,12 +4,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState,useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
-
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 const Nav = () => {
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   useEffect(() => {
     (async () => {
       const res = await getProviders();
@@ -39,6 +48,29 @@ const Nav = () => {
             <Link href='/meal-setup' className='black_btn'>
               Meal setUp
             </Link>
+      
+            <div>
+              <button className='black_btn'
+                aria-controls={open ? '' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}>
+                Room
+              </button>
+              <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+              >
+                <Link href='/test'>
+                  <MenuItem onClick={handleClose}>Add Room</MenuItem>
+                </Link>
+                <Link href='/table'>
+                  <MenuItem onClick={handleClose}>Room List</MenuItem>
+                </Link>
+              </Menu>
+            </div>
+
             <button type='button' onClick={signOut} className='outline_btn'>
               Sign Out
             </button>
