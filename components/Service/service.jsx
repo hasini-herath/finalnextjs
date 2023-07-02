@@ -12,16 +12,15 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { format } from 'date-fns';
+
 import Box from '@mui/material/Box';
-import BedroomParentOutlinedIcon from '@mui/icons-material/BedroomParent';
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
-import SvgIcon from '@mui/material/SvgIcon';
+
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -33,8 +32,8 @@ const Form = ({ post, setPost, type, handleSubmit, submitting }) => {
 
   return (
     <section>
-      <Typography variant="h6" gutterBottom>
-      <BedroomParentOutlinedIcon  sx={{ fontSize: 40 }} color='secondary' />  {type} Test
+      <Typography variant="h6" gutterBottom >  
+      <ManageAccountsOutlinedIcon  sx={{ fontSize: 40 }} color='secondary' />  {type} Service
       </Typography> 
     
       <form onSubmit={handleSubmit}>

@@ -48,7 +48,7 @@ const Nav = () => {
             <Link href='/meal-setup' className='black_btn'>
               Meal setUp
             </Link>
-      
+        
             <div>
               <button className='black_btn'
                 aria-controls={open ? '' : undefined}
@@ -62,12 +62,19 @@ const Nav = () => {
                 open={open}
                 onClose={handleClose}
               >
-                <Link href='/test'>
-                  <MenuItem onClick={handleClose}>Add Room</MenuItem>
+                <Link href='/room'>
+                  <MenuItem onClick={handleClose}>Room</MenuItem>
+                </Link>
+                <Link href='/meal'>
+                  <MenuItem onClick={handleClose}>Meal</MenuItem>
+                </Link>
+                <Link href='/service'>
+                  <MenuItem onClick={handleClose}>Service</MenuItem>
                 </Link>
                 <Link href='/table'>
-                  <MenuItem onClick={handleClose}>Room List</MenuItem>
+                  <MenuItem onClick={handleClose}>Test</MenuItem>
                 </Link>
+            
               </Menu>
             </div>
 
