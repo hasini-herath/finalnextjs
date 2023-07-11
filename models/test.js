@@ -29,6 +29,10 @@ const TestSchema = new Schema({
     type: String,
     required: [true, 'MealIngredients is required.'],
   },
+  des: {
+    type: String,
+    required: [true, 'MealIngredients is required.'],
+  },
 
 });
 

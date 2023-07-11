@@ -2,12 +2,12 @@ import Test from "@models/test";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (request) => {
-    const { userId, type, name, message, gender, date, age } = await request.json();
+    const { userId, type, name, message, gender, date, age, des } = await request.json();
 
     try {
         await connectToDB();
         const newTest = new Test({ 
-            creator: userId, type, name, message, gender, date, age
+            creator: userId, type, name, message, gender, date, age, des
         });
 
         await newTest.save();

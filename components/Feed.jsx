@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import PromptCard from "./PromptCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
-    <div className='mt-16 prompt_layout'>
+    <div className='feed'>
       {data.map((post) => (
         <PromptCard
           key={post._id}
@@ -68,27 +70,27 @@ const Feed = () => {
   };
 
   return (
-    <section className='feed'>
-      <form className='relative w-full flex-center'>
-        <input
-          type='text'
-          placeholder='Search for a tag or a username'
-          value={searchText}
-          onChange={handleSearchChange}
-          required
-          className='search_input peer'
-        />
-      </form>
+    <section >
+         <Box textAlign="center">
+      <TextField
+       sx={{ width: '500px' }}
+        type='text'
+        placeholder='Search for a tag or a username'
+        value={searchText}
+        onChange={handleSearchChange}
+        required
+        className='search_input peer'
+      />
+    </Box>
 
       {/* All Prompts */}
+      <Box>
       {searchText ? (
-        <PromptCardList
-          data={searchedResults}
-          handleTagClick={handleTagClick}
-        />
+        <PromptCardList data={searchedResults} handleTagClick={handleTagClick} />
       ) : (
         <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
       )}
+    </Box>
     </section>
   );
 };

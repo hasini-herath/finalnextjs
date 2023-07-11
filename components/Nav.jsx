@@ -1,12 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import "@styles/globals.css"
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';  
+
 import { useState,useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+
+
+import Link from '@mui/material/Link';
+
 const Nav = () => {
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
@@ -27,77 +32,54 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="flex-between w-full mb-16 pt-3">
-      <Link href='/' className="flex gap-2 flex-center">
-        <Image 
-          src='/assets/images/logo.svg'
-          alt="sweet space logo"
-          width={30}
-          height={30}
-          className="object-contain"
-        />
-        <p className="logo_text">sweet space</p>
-      </Link>
+    <div className='app-bar'>
+    
+      <div >
+    <Box display="flex"
+    justifyContent="space-between"
+    width="100%"
+    marginBottom="16px"
+    paddingTop="3px">
 
-      <div className="sm:flex hidden">
+<Link className="logo" href="/" >
+      abc.com
+      
+    </Link>
+  
+      <Box className="test" >
       {session?.user ? (
-          <div className='flex gap-3 md:gap-5'>
-            <Link href='/create-prompt' className='black_btn'>
-              Create Post
+          <Box >
+            <Link href="/create-prompt" className="nav-links">
+               Create Post     
             </Link>
-            <Link href='/meal-setup' className='black_btn'>
-              Meal setUp
-            </Link>
-        
-            <div>
-              <button className='black_btn'
-                aria-controls={open ? '' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}>
-                Room
-              </button>
-              <Menu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-              >
-                <Link href='/room'>
-                  <MenuItem onClick={handleClose}>Room</MenuItem>
-                </Link>
-                <Link href='/meal'>
-                  <MenuItem onClick={handleClose}>Meal</MenuItem>
-                </Link>
-                <Link href='/service'>
-                  <MenuItem onClick={handleClose}>Service</MenuItem>
-                </Link>
-                <Link href='/table'>
-                  <MenuItem onClick={handleClose}>Test</MenuItem>
-                </Link>
+
             
-              </Menu>
-            </div>
-
-            <button type='button' onClick={signOut} className='outline_btn'>
+            <Link href='/room/list' className="nav-links"
+                  onClick={handleClose}>RoomList
+                </Link>
+                <Link href='/room/new' className="nav-links"
+                  onClick={handleClose}>Room
+                </Link>
+                <Link href='/meal' className="nav-links"
+                onClick={handleClose}>Meal
+                </Link>
+                <Link href='/service' className="nav-links"
+                onClick={handleClose}>Service
+                </Link>
+                <Link href='/table' className="nav-links"
+                   onClick={handleClose}>Test
+                </Link>
+           <Button className='signout_btn' onClick={signOut} >
               Sign Out
-            </button>
+            </Button>
+            
+          </Box>
 
-            <Link href='/profile'>
-              <Image
-                src={session?.user.image}
-                alt="sweet space logo"
-                width={37}
-                height={37}
-                className="rounded-full"
-              />
-            </Link>
-          </div>
         ) : (
           <>
               {providers &&
               Object.values(providers).map((provider) => (
-                <button
-                  type='button'
+                <Button 
                   key={provider.name}
                   onClick={() => {
                     signIn(provider.id);
@@ -105,74 +87,45 @@ const Nav = () => {
                   className='black_btn'
                 >
                   Sign in
-                </button>
+                </Button>
               ))}
           </>
         )}
-      </div>
+      </Box>
 
-      <div className='sm:hidden flex relative'>
+      <div >
       {session?.user ? (
-          <div className='flex'>
+          <Box >
         
-              <Image
-                src={session?.user.image}
-                alt="sweet space logo"
-                width={37}
-                height={37}
-                className='rounded-full'
+      
           
-              onClick={() => setToggleDropdown(!toggleDropdown)}
-              />
-           {toggleDropdown && (
-              <div className='dropdown'>
-                <Link
-                  href='/profile'
-                  className='dropdown_link'
-                  onClick={() => setToggleDropdown(false)}
-                >
-                  My Profile
-                </Link>
-                <Link
-                  href='/create-prompt'
-                  className='dropdown_link'
-                  onClick={() => setToggleDropdown(false)}
-                >
-                  Create Prompt
-                </Link>
-                <button
-                  type='button'
-                  onClick={() => {
-                    setToggleDropdown(false);
-                    signOut();
-                  }}
-                  className='mt-5 w-full black_btn'
-                >
-                  Sign Out
-                </button>
-              </div>
-            )}
+          
          
-          </div>
+          </Box>
         ) : (
           <>
               {providers &&
               Object.values(providers).map((provider) => (
-                <button
-                  type='button'
+                <Button 
                   key={provider.name}
                   onClick={() => {
                     signIn(provider.id);
                   }}
-                  className='black_btn'
+                 
                 >
                   Sign in
-                </button>
+                </Button>
               ))}
           </>
         )}
+        
       </div>
-    </nav>  
+      
+    
+    </Box>  
+    </div>
+      </div>
+    
   )
 }
 

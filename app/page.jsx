@@ -1,21 +1,33 @@
+"use client";
+import "@styles/globals.css"
 import Feed from "@components/Feed";
-import PromptCard from "@components/PromptCard";
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
-const Home = () => (
-  <section className='w-full flex-center flex-col'>
-    <h1 className='head_text text-center'>
-      Discover & Share
-      <br className='max-md:hidden' />
-      <span className='orange_gradient text-center'> AI-Powered Prompts</span>
-    </h1>
-    <p className='desc text-center'>
-      Promptopia is an open-source AI prompting tool for modern world to
-      discover, create and share creative prompts
-    </p>
 
-    <Feed />
+export default function Home() {
+  return (
+    <Box>
+    <main className="main">
+           
+        <Typography className="maintitle" >
+    Discover & Share
+      </Typography>
     
-  </section>
-);
 
-export default Home;
+      <Typography className="subtitle" >
+      AI-Powered Prompts
+         </Typography>
+ 
+         <Typography className="description">
+    <Box >Promptopia is an open-source AI prompting tool for modern world to
+      discover, create and share creative prompts</Box> 
+    </Typography>
+    
+    </main>
+<Feed />
+
+
+    </Box>
+  )
+}

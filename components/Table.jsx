@@ -23,6 +23,8 @@ export default function BasicTable() {
     { field: 'gender', headerName: 'gender', width: 130 },
     { field: 'date', headerName: 'date', width: 130 },
     { field: 'age', headerName: 'age', width: 130 },
+    { field: 'des', headerName: 'des', width: 130 },
+
   ];
 
   useEffect(() => {
@@ -52,6 +54,8 @@ export default function BasicTable() {
           gender: post.gender,
           date: post.date,
           age: post.age,
+          des: post.des,
+
         }))}
         columns={columns}
         initialState={{

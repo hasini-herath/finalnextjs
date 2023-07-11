@@ -1,37 +1,60 @@
 import { Schema, model, models } from 'mongoose';
 
-const TestSchema = new Schema({
+const RoomSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  type: {
+  title: {
     type: String,
-    required: [true, 'MealType is required.'],
+    required: [true, 'overview is required.'],
   },
-  name: {
+  overview: {
     type: String,
-    required: [true, 'MealPlan is required.'],
+    required: [true, 'overview is required.'],
   },
-  message: {
+  description: {
     type: String,
-    required: [true, 'MealIngredients is required.'],
+    required: [true, 'description is required.'],
   },
-  gender: {
+  room_type: {
     type: String,
-    required: [true, 'MealIngredients is required.'],
+    required: [true, 'type is required.'],
   },
-  date: {
+  size: {
     type: String,
-    required: [true, 'MealIngredients is required.'],
+    required: [true, 'size is required.'],
   },
-  age: {
+  bed_description: {
     type: String,
-    required: [true, 'MealIngredients is required.'],
+    required: [true, 'bed_description is required.'],
   },
-
+  amenities: {
+    type: String,
+    required: [true, 'amenities is required.'],
+  },
+  number_guest: {
+    type: String,
+    required: [true, 'number_guest is required.'],
+  },
+  standard_price: {
+    type: String,
+    required: [true, 'standard_price is required.'],
+  },
+  additional_charges: {
+    type: String,
+    required: [true, 'additional_charges is required.'],
+  },
+  status: {
+    type: String,
+    required: [true, 'status is required.'],
+  },
+  terms_conditions: {
+    type: String,
+    required: [true, 'status is required.'],
+  },
 });
 
-const Test = models.Test || model('Test', TestSchema);
+const Room = models.Room || model('Room', RoomSchema);
 
-export default Test;
+export default Room;

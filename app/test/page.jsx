@@ -11,7 +11,7 @@ const Test = () => {
   const { data: session } = useSession();
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ type: "", name: "", message: "", gender:"", date:"", age:""});
+  const [post, setPost] = useState({ type: "", name: "", message: "", gender:"", date:"", age:"", des:""});
 
   const test = async (e) => {
     e.preventDefault();
@@ -28,6 +28,7 @@ const Test = () => {
           gender: post.gender,
           date: post.date,
           age: post.age,
+          des: post.des,
           
 
         }),

@@ -1,10 +1,15 @@
 "use client";
-
+import "@styles/globals.css"
 import { useState } from "react";
-import Image from "next/image";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Image from 'next/image';
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
@@ -15,7 +20,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const handleProfileClick = () => {
     console.log(post);
 
-    if (post.creator._id === session?.user.id) return router.push("/profile");
+    if (post.creator._id === session?.user.id) return router.push("/room");
 
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   };
@@ -27,69 +32,86 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   };
 
   return (
-    <div className='prompt_card card-center'>
-      <div className='flex justify-between items-start gap-5'>
-        <div
-          className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
-          onClick={handleProfileClick}
+    <>
+    
+
+
+    <Box className="prompt-card">
+      
+        <Box className="prompt-icon">
+       
+          <Box className="prompt-click"
+            onClick={handleProfileClick}
+          >
+           
+           <Image
+              src={post.creator.image}
+              alt='user_image'
+              width={40}
+              height={40}
+
+            />
+            <Box className="prompt-name">
+              <Typography >
+                {post.creator.username}
+              </Typography>
+              <Typography >
+                {post.creator.email}
+              </Typography>
+            </Box>
+          </Box>
+
+          <Tooltip title={copied === post.prompt ? 'Copied' : 'Copy'}>
+            <IconButton onClick={handleCopy} >
+              <Image
+                src={copied === post.prompt ? '/assets/icons/tick.svg' : '/assets/icons/copy.svg'}
+                alt={copied === post.prompt ? 'tick_icon' : 'copy_icon'}
+                width={12}
+                height={12}
+              />
+            </IconButton>
+          </Tooltip>
+        </Box>
+        <Typography
+          variant="body2"
+          sx={{
+            marginTop: '2rem',
+          }}
         >
-          <Image
-            src={post.creator.image}
-            alt='user_image'
-            width={40}
-            height={40}
-            className='rounded-full object-contain'
-          />
+          {post.prompt}
+        </Typography>
 
-          <div className='flex flex-col'>
-            <h3 className='font-satoshi font-semibold text-gray-900'>
-              {post.creator.username}
-            </h3>
-            <p className='font-inter text-sm text-gray-500'>
-              {post.creator.email}
-            </p>
-          </div>
-        </div>
+        <Typography className="prompt-tag"
+          onClick={() => handleTagClick && handleTagClick(post.tag)}
+        >
+          #{post.tag}
+        </Typography>
 
-        <div className='copy_btn' onClick={handleCopy}>
-          <Image
-            src={
-              copied === post.prompt
-                ? "/assets/icons/tick.svg"
-                : "/assets/icons/copy.svg"
-            }
-            alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
-            width={12}
-            height={12}
-          />
-        </div>
-      </div>
-
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{post.prompt}</p>
-      <p
-        className='font-inter text-sm blue_gradient cursor-pointer'
-        onClick={() => handleTagClick && handleTagClick(post.tag)}
-      >
-        #{post.tag}
-      </p>
-
-      {session?.user.id === post.creator._id && pathName === "/profile" && (
-        <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
-          <p
-            className='font-inter text-sm green_gradient cursor-pointer'
-            onClick={handleEdit}
+        {session?.user.id === post.creator._id && pathName === "/room" && (
+          <Box
+            mt={5}
+            display="flex"
+            alignItems="center"
+            gap={4}
+            borderTop="1px solid rgba(0, 0, 0, 0.12)"
+            pt={3}
           >
-            Edit
-          </p>
-          <p
-            className='font-inter text-sm orange_gradient cursor-pointer'
-            onClick={handleDelete}
-          >
-            Delete
-          </p>
-        </div>
-      )}
-    </div>
+            <Typography className="prompt-tag"
+              onClick={handleEdit}
+            >
+              Edit
+            </Typography>
+            <IconButton
+              size="small"
+              className="orange_gradient"
+              onClick={handleDelete}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Box>
+        )}
+      </Box>
+     </>
   );
 };
 

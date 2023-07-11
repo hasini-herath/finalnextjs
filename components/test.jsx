@@ -7,21 +7,16 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import dayjs from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { format } from 'date-fns';
 import Box from '@mui/material/Box';
 import BedroomParentOutlinedIcon from '@mui/icons-material/BedroomParent';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
-import SvgIcon from '@mui/material/SvgIcon';
-
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -104,7 +99,8 @@ const Form = ({ post, setPost, type, handleSubmit, submitting }) => {
               <DemoContainer components={['DatePicker']}>
                 <DatePicker
                   label=" picker"
-                 
+                //  defaultValue={today}
+                  disablePast
                   value={post.date}
                   onChange={(newValue) => setPost({ ...post, date: newValue })}
 
@@ -130,6 +126,20 @@ const Form = ({ post, setPost, type, handleSubmit, submitting }) => {
             </Box>
           </Grid>
         </Grid>
+        <br></br>
+        <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              value={post.des}
+              onChange={(e) => setPost({ ...post, des: e.target.value })}
+              id="num"
+              name="num"
+              label="num"
+              fullWidth
+              autoComplete="family-name"
+              variant="standard"
+            />
+          </Grid>
         <br></br>
         <Stack direction="row" spacing={2}>
           <Button color="success"
